@@ -91,7 +91,7 @@
 /// Value may be SIGNAL or INTERRUPT.
 /// \warning Do not change unless you know what you're doing.
 #ifndef UART_INTERRUPT_HANDLER
-#define UART_INTERRUPT_HANDLER	SIGNAL
+#define UART_INTERRUPT_HANDLER	ISR
 #endif
 
 // compatibility with most newer processors
@@ -103,7 +103,9 @@
 	#define	UBRRL				UBRR
 #endif
 // compatibility with megaXX8 processors
-#if	defined(__AVR_ATmega88__)	|| \
+#if	defined(__AVR_ATmega48__)	|| \
+	defined(__AVR_ATmega48P__)	|| \
+	defined(__AVR_ATmega88__)	|| \
 	defined(__AVR_ATmega168__)	|| \
 	defined(__AVR_ATmega644__)
 	#define UDR					UDR0
@@ -116,15 +118,15 @@
 	#define TXEN				TXEN0
 	#define UBRRL				UBRR0L
 	#define UBRRH				UBRR0H
-	#define SIG_UART_TRANS		SIG_USART_TRANS
-	#define SIG_UART_RECV		SIG_USART_RECV
-	#define SIG_UART_DATA		SIG_USART_DATA
+	#define SIG_UART_TRANS		USART_TX_vect
+	#define SIG_UART_RECV		USART_RX_vect
+	#define SIG_UART_DATA		USART_UDRE_vect
 #endif
 // compatibility with mega169 processors
 #if	defined(__AVR_ATmega169__)
-	#define SIG_UART_TRANS		SIG_USART_TRANS
-	#define SIG_UART_RECV		SIG_USART_RECV
-	#define SIG_UART_DATA		SIG_USART_DATA
+	#define SIG_UART_TRANS		USART_TX_vect
+	#define SIG_UART_RECV		USART_RX_vect
+	#define SIG_UART_DATA		USART_UDRE_vect
 #endif
 // compatibility with dual-uart processors
 // (if you need to use both uarts, please use the uart2 library)
@@ -132,9 +134,9 @@
 	#define UDR					UDR0
 	#define UCR					UCSR0B
 	#define UBRRL				UBRR0
-	#define SIG_UART_TRANS		SIG_UART0_TRANS
-	#define SIG_UART_RECV		SIG_UART0_RECV
-	#define SIG_UART_DATA		SIG_UART0_DATA
+	#define SIG_UART_TRANS		USART0_TX_vect
+	#define SIG_UART_RECV		USART0_RX_vect
+	#define SIG_UART_DATA		USART0_UDRE_vect
 #endif
 #if defined(__AVR_ATmega128__)
 #ifdef UART_USE_UART1

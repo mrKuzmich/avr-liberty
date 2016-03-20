@@ -172,7 +172,7 @@
 // *do not change unless you know what you're doing
 // Value may be SIGNAL or INTERRUPT
 #ifndef TIMER_INTERRUPT_HANDLER
-#define TIMER_INTERRUPT_HANDLER		SIGNAL
+#define TIMER_INTERRUPT_HANDLER		ISR
 #endif
 
 // functions

@@ -73,12 +73,13 @@ all:	$(TRG).elf $(TRG).cof $(TRG).bin $(TRG).hex $(TRG).eep $(TRG).ok
 	$(OBJCOPY) -j .eeprom --set-section-flags=.eeprom="alloc,load" --change-section-lma .eeprom=0 -O $(FORMAT) $< $@
 
 %.cof: %.elf
-	$(OBJCOPY) --debugging -O coff-ext-avr \
-		--change-section-address   .data-0x800000 \
-		--change-section-address    .bss-0x800000 \
-		--change-section-address .noinit-0x800000 \
-		--change-section-address .eeprom-0x810000 \
-		$< $@
+	# @echo "skip: COFF target didn't exist in avr toolchain anymore"
+#	$(OBJCOPY) --debugging -O coff-ext-avr \
+#		--change-section-address   .data-0x800000 \
+#		--change-section-address    .bss-0x800000 \
+#		--change-section-address .noinit-0x800000 \
+#		--change-section-address .eeprom-0x810000 \
+#		$< $@
 
 
 ###### BLOCK 10) If all other steps compile ok then echo "Errors: none" ######
@@ -104,7 +105,7 @@ clean:
 	$(RM) $(TRG).hex
 	$(RM) $(TRG).bin
 	@echo "Errors: none"
-	
+
 size:
 	$(SIZE) $(TRG).elf
 

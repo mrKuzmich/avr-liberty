@@ -52,7 +52,7 @@
 // *do not change unless you know what you're doing
 // Value may be SIGNAL or INTERRUPT
 #ifndef EXTINT_INTERRUPT_HANDLER
-#define EXTINT_INTERRUPT_HANDLER	SIGNAL
+#define EXTINT_INTERRUPT_HANDLER	ISR
 #endif
 
 // processor-adaptive defines
